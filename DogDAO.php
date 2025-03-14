@@ -15,19 +15,10 @@
             return $mysqli;
         }
 
-        public function addContact($contact){
+        public function addDog($dog){
             $connection=$this->getConnection();
-            $stmt = $connection->prepare("INSERT INTO contacts (username, email, passwd) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $contact->getUsername(), $contact->getEmail(),$contact->getPasswd());
-            $stmt->execute();
-            $stmt->close();
-            $connection->close();
-        }
-
-        public function deleteContact($contactid){
-            $connection=$this->getConnection();
-            $stmt = $connection->prepare("DELETE FROM contacts WHERE contactID = ?");
-            $stmt->bind_param("i", $contactid);
+            $stmt = $connection->prepare("INSERT INTO dogs (ownerName, dogName, dogBreed, dogColor, dogAge) VALUES (?, ?)");
+            $stmt->bind_param("ss", $dog->getUsername(), $dog->getEmail());
             $stmt->execute();
             $stmt->close();
             $connection->close();
@@ -48,17 +39,10 @@
             return $contacts;
         }
 
-        public function authenticate($username, $passwd){
-            $connection=$this->getConnection();
-            $stmt = $connection->prepare("SELECT * FROM contacts WHERE username = ? AND passwd = ?;");
-            $stmt->bind_param("ss",$username,$passwd); 
-            $stmt->execute();
-            $result = $stmt->get_result();
-            $row = $result->fetch_assoc();
-            $stmt->close();
-            $connection->close();
-            return $row;
-        }
+
+
+    }
+?>
 
 
     }
